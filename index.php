@@ -11,6 +11,12 @@ if ( isset($_REQUEST['r']) )
     $route = $_REQUEST['r'];
 }
 
+// isRegisteredUser
+if ( isRegisteredUser( $fb_user_id, $fb_user_email ) )
+{
+    $route = 'init';
+}
+
 // actions
 if ( isset($_REQUEST['action']) )
 {
@@ -18,7 +24,10 @@ if ( isset($_REQUEST['action']) )
     {
         print '<p>register action. register the user and update database. If valid, redirect user to next step. Click to go <a href="index.php?r=intro">next</a></p>';
         
-        //header('location:index.php?r=intro');
+        if ( registerTheUser( $_REQUEST['email'] ) )
+        {
+            //header('location:index.php?r=intro');
+        }
     }
 }
 ?>
